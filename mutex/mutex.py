@@ -107,7 +107,7 @@ def test():
 
     row, col = 100, 100
     np.random.seed(77)
-    df = pd.DataFrame(sparse.random(100,100, density=0.2).A).apply(np.ceil)
+    df = pd.DataFrame(sparse.random(row,col, density=0.2).A).apply(np.ceil)
 
     df.loc[0] = [1 if x < 20 else 0 for x in range(0,df.shape[1]) ]
     df.loc[1] = [1 if x > 13 and x < 35 else 0 for x in range(0,df.shape[1]) ]
@@ -117,10 +117,16 @@ def test():
 
     pd.set_option('display.max_columns', 100)
     print(df.loc[[0,1,2]])
-    print(m.calculate([0, 1, 2]))
 
+    r = m.calculate([0, 1, 2])
+    print(r)
+    print(r.mean_sim_coverage)
+    print(r.coverage)
 
-    print(m.calculate([4, 5, 6]))
+    r = m.calculate([4, 5, 6])
+    print(r)
+    print(r.mean_sim_coverage)
+    print(r.coverage)
 
 
 
