@@ -5,16 +5,16 @@ import random
 import pandas as pd
 import numpy as np
 
-
 __author__ = 'michael.p.schroeder@gmail.com'
-
 
 import multiprocessing as mp
 
 
 class MutExResult(object):
-    def __init__(self, coverage, signal, higher_coverage_count, lower_coverage_count, permutations, mean_sim_coverage,
+    def __init__(self, coverage, signal, higher_coverage_count, lower_coverage_count, permutations,
+                 mean_sim_coverage, stdev_sim_coverage,
                  sample_size, items):
+        self.stdev_sim_coverage = stdev_sim_coverage
         self.items = items
         self.sample_size = sample_size
         self.mean_sim_coverage = mean_sim_coverage
@@ -23,23 +23,26 @@ class MutExResult(object):
         self.higher_coverages = higher_coverage_count
         self.signal = signal
         self.coverage = coverage
-        self.signal_coverage_ratio = coverage/signal
+        self.signal_coverage_ratio = coverage / signal
 
         self.mutex_pvalue = higher_coverage_count / permutations
         self.co_occurence_pvalue = lower_coverage_count / permutations
+        self.zscore = (coverage - mean_sim_coverage) / stdev_sim_coverage
 
     def __str__(self):
         return "MuTexResult\n" \
+               "  Zscore:                     {}\n" \
                "  Mutual Exclusive p-value:   {}\n" \
                "  Co-occurence p-value:       {}\n" \
                "  Permutations:               {}\n" \
                "  Sample Coverage:            {}\n" \
                "  Signal:                     {}".format(
-            self.mutex_pvalue, self.co_occurence_pvalue, self.permutations, self.coverage, self.signal
+            self.zscore, self.mutex_pvalue, self.co_occurence_pvalue, self.permutations, self.coverage, self.signal
         )
 
     def __repr__(self):
-        self.__str__()
+        return self.__str__()
+
 
 class MutEx(object):
     def __init__(self, background: pd.DataFrame, permutations: int=100):
@@ -94,6 +97,7 @@ class MutEx(object):
                            higher_coverage_count=np.sum(higher_coverage),
                            lower_coverage_count=np.sum(lower_coverage), permutations=n,
                            mean_sim_coverage=np.mean(sim_coverages),
+                           stdev_sim_coverage=np.std(sim_coverages),
                            sample_size=len(self.sample_weights),
                            items=indices
                            )
@@ -141,14 +145,13 @@ def test():
     r = m.calculate([4, 5, 6], parallel=False)
     print(r)
 
-
     print("\nExample - multi-threaded \n----------")
 
     r = m.calculate([0, 1, 2])
     print(r)
 
     random.seed(18)
-    group_generator = (random.sample( df.index.tolist(), random.sample([2,3,4], 1)[0]) for x in range(10) )
+    group_generator = (random.sample(df.index.tolist(), random.sample([2, 3, 4], 1)[0]) for x in range(10))
     result_list = [m.calculate(g) for g in group_generator]
     print(pd.DataFrame.from_records([r.__dict__ for r in result_list]))
 
