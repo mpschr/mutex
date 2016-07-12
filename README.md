@@ -3,6 +3,13 @@ Algorithm to estimate the significance of a mutual exclusive pattern or co-occur
 
 ![the MutEx algorithm](mutex-algorithm.png)
 
+## citations
+
+This python implementation has a citable DOI from Zenodo 
+
+The algorithm itself has first been used in the following publication:
+![http://www.cell.com/cancer-cell/abstract/S1535-6108(15)00057-4](Rubio-Perez, Tamborero, Schroeder, Antolín, Deu-Pons, Perez-Llamas, Mestres, Gonzalez-Perez and Lopez-Bigas. *In Silico Prescription of Anticancer Drugs to Cohorts of 28 Tumor Types Reveals Targeting Opportunities*)
+
 
 ## dependencies
 
@@ -12,10 +19,6 @@ Algorithm to estimate the significance of a mutual exclusive pattern or co-occur
 
  - joblib
  - multiprocessing
-
-## citations
-
-
 
 ## provenance
 This is the python implementation of the MutEx algorithm described in the PhD Thesis "Analysis and visualization of multidimensional cancer genomics data" : http://www.tdx.cat/handle/10803/301436
