@@ -1,5 +1,5 @@
 # MutEx
-a simple algorithm to estimate the significance of a mutual exclusive pattern or co-occurrence
+Algorithm to estimate the significance of a mutual exclusive pattern or co-occurrence
 
 ![the MutEx algorithm](mutex-algorithm.png)
 
