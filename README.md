@@ -5,7 +5,8 @@ Algorithm to estimate the significance of a mutual exclusive pattern or co-occur
 
 ## citations
 
-This python implementation has a citable DOI from Zenodo.
+This python implementation has a citable DOI from Zenodo. Click on the badge for different citation styles: [![DOI](https://zenodo.org/badge/7688/mpschr/mutex.svg)](https://zenodo.org/badge/latestdoi/7688/mpschr/mutex)
+
 
 The algorithm itself has first been used in the following publication:
 [Rubio-Perez, Tamborero, Schroeder, Antolín, Deu-Pons, Perez-Llamas, Mestres, Gonzalez-Perez and Lopez-Bigas. *In Silico Prescription of Anticancer Drugs to Cohorts of 28 Tumor Types Reveals Targeting Opportunities*](http://www.cell.com/cancer-cell/abstract/S1535-6108(15)00057-4)
